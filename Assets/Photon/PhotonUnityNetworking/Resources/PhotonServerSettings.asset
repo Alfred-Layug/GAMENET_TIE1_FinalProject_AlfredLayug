@@ -46,6 +46,7 @@ MonoBehaviour:
   - ShowKillFeed
   - ShowWinner
   - ReturnToLobby
+  - CreateBulletEffects
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

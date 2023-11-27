@@ -12,8 +12,6 @@ public class SpawnManager : MonoBehaviour
 
     private void Awake()
     {
-        // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -26,8 +24,8 @@ public class SpawnManager : MonoBehaviour
 
     public Vector3 SetSpawnLocation()
     {
-        int spawnLocationIndex = Random.Range(0, _spawnLocations.Count);
+        int spawnPosition = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
-        return _spawnLocations[spawnLocationIndex].transform.position;
+        return _spawnLocations[spawnPosition].transform.position;
     }
 }

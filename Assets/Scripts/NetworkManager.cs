@@ -86,7 +86,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
 
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = (byte)int.Parse(_playerCountInputField.text);
+        roomOptions.MaxPlayers = 2;
 
         PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
@@ -270,7 +270,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         string roomName = "Room " + Random.Range(1000, 10000);
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 20;
+        roomOptions.MaxPlayers = 2;
 
         PhotonNetwork.CreateRoom(roomName, roomOptions);
     }

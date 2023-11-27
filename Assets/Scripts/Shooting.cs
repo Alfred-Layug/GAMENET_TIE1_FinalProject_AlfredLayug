@@ -8,14 +8,9 @@ using TMPro;
 public class Shooting : MonoBehaviourPunCallbacks
 {
     public Camera _camera;
-    public GameObject _hitEffectPrefab;
+    public GameObject _bulletEffectPrefab;
 
-    [Header("HP Related Stuff")]
-    public float _startHealth = 100;
-    private float _health;
-    public Image _healthBar;
-
-    [Header("Player Name Stuff")]
+    [Header("Player Name")]
     public TextMeshProUGUI _playerNameText;
 
     private Animator _animator;
@@ -23,11 +18,17 @@ public class Shooting : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        _health = _startHealth;
-        _healthBar.fillAmount = _health / _startHealth;
         _playerNameText.text = photonView.Owner.NickName;
         _animator = this.GetComponent<Animator>();
         _score = 0;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && photonView.IsMine)
+        {
+            Fire();
+        }
     }
 
     public void Fire()
@@ -41,40 +42,15 @@ public class Shooting : MonoBehaviourPunCallbacks
             {
                 Debug.Log(hit.collider.gameObject.name);
 
-                photonView.RPC("CreateHitEffects", RpcTarget.All, hit.point);
-
-                if (hit.collider.gameObject.CompareTag("Player") && !hit.collider.gameObject.GetComponent<PhotonView>().IsMine
-                        && hit.collider.gameObject.GetComponent<Shooting>()._healthBar.fillAmount > 0)
-                {
-                    hit.collider.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, 25);
-                    
-                    if (hit.collider.gameObject.GetComponent<Shooting>()._healthBar.fillAmount <= 0)
-                    {
-                        UpdateKillAmount();
-                    }
-                }
+                photonView.RPC("CreateBulletEffects", RpcTarget.All, hit.point);
             }
         }
     }
 
     [PunRPC]
-    public void TakeDamage(int damage, PhotonMessageInfo info)
+    public void CreateBulletEffects(Vector3 position)
     {
-        this._health -= damage;
-        this._healthBar.fillAmount = _health / _startHealth;
-
-        if (_health <= 0)
-        {
-            Die();
-            photonView.RPC("ShowKillFeed", RpcTarget.All, info.Sender.NickName + " killed " + info.photonView.Owner.NickName);
-            Debug.Log(info.Sender.NickName + " killed " + info.photonView.Owner.NickName);
-        }
-    }
-
-    [PunRPC]
-    public void CreateHitEffects(Vector3 position)
-    {
-        GameObject hitEffectGameObject = Instantiate(_hitEffectPrefab, position, Quaternion.identity);
+        GameObject hitEffectGameObject = Instantiate(_bulletEffectPrefab, position, Quaternion.identity);
         Destroy(hitEffectGameObject, 0.2f);
     }
 
@@ -83,32 +59,7 @@ public class Shooting : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             _animator.SetBool("isDead", true);
-            StartCoroutine(RespawnCountdown());
         }
-    }
-
-    private IEnumerator RespawnCountdown()
-    {
-        GameObject respawnText = GameObject.Find("Respawn Text");
-        float respawnTime = 5.0f;
-
-        while (respawnTime > 0)
-        {
-            yield return new WaitForSeconds(1.0f);
-            respawnTime--;
-
-            transform.GetComponent<PlayerMovementController>().enabled = false;
-            respawnText.GetComponent<TextMeshProUGUI>().text = "You are killed. Respawning in " + respawnTime.ToString(".00");
-        }
-
-        _animator.SetBool("isDead", false);
-        respawnText.GetComponent<TextMeshProUGUI>().text = "";
-
-        this.transform.position = SpawnManager.Instance.SetSpawnLocation();
-        transform.GetComponent<PlayerMovementController>().enabled = true;
-
-        photonView.RPC("HideKillFeed", RpcTarget.All);
-        photonView.RPC("RegainHealth", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -123,13 +74,6 @@ public class Shooting : MonoBehaviourPunCallbacks
     {
         GameObject killFeedText = GameObject.Find("Kill Feed Text");
         killFeedText.GetComponent<TextMeshProUGUI>().text = "";
-    }
-
-    [PunRPC]
-    public void RegainHealth()
-    {
-        _health = 100;
-        _healthBar.fillAmount = _health / _startHealth;
     }
 
     private void UpdateKillAmount()
