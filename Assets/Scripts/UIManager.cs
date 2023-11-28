@@ -28,9 +28,6 @@ public class UIManager : MonoBehaviourPunCallbacks
     {
         if (photonEvent.Code == (byte)RaiseEventsCode.WhoWonEventCode)
         {
-            GetComponent<PlayerMovementController>().enabled = false;
-            GetComponent<RigidbodyFPSController>().enabled = false;
-            GetComponent<Animator>().enabled = false;
             GetComponent<Shooting>().enabled = false;
 
             object[] data = (object[])photonEvent.CustomData;

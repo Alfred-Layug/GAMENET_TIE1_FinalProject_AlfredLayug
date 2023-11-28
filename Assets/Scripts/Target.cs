@@ -31,10 +31,12 @@ public class Target : MonoBehaviourPunCallbacks
 
     public void EliminateTarget()
     {
-        string name = photonView.name;
+        int viewID = photonView.ViewID;
+
+        Debug.Log(viewID);
 
         // event data
-        object[] data = new object[] { name };
+        object[] data = new object[] { viewID };
 
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions
         {
@@ -55,9 +57,9 @@ public class Target : MonoBehaviourPunCallbacks
         {
             object[] data = (object[])photonEvent.CustomData;
 
-            string objectName = (string)data[0];
+            int objectViewID = (int)data[0];
 
-            if (photonView.name == objectName)
+            if (photonView.ViewID == objectViewID)
             {
                 roomProgressChecker.RemoveTarget(gameObject);
                 Destroy(gameObject);

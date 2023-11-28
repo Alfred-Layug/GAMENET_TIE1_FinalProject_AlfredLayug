@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4661917516968416891}
   - component: {fileID: 409808058210996381}
   - component: {fileID: 7224988830130963956}
-  - component: {fileID: 4732871391146278718}
+  - component: {fileID: 5961799636107916857}
   m_Layer: 0
   m_Name: CubeTarget
   m_TagString: Untagged
@@ -140,11 +140,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 0
   ObservedComponents:
-  - {fileID: 4732871391146278718}
+  - {fileID: 5961799636107916857}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4732871391146278718
+--- !u!114 &5961799636107916857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
