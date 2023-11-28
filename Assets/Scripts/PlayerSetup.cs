@@ -31,11 +31,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             GameObject playerUi = Instantiate(_playerUiPrefab);
-            //_playerMovementController._fixedTouchField = playerUi.transform.Find("RotationTouchField").GetComponent<FixedTouchField>();
-            //_playerMovementController._joystick = playerUi.transform.Find("Fixed Joystick").GetComponent<Joystick>();
             _fpsCamera.enabled = true;
-
-            //playerUi.transform.Find("FireButton").GetComponent<Button>().onClick.AddListener(() => _shooting.Fire());
         }
         else
         {

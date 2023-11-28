@@ -47,6 +47,14 @@ MonoBehaviour:
   - ShowWinner
   - ReturnToLobby
   - CreateBulletEffects
+  - AnnounceRoomProgression
+  - HideRoomProgressionText
+  - AnnounceWinner
+  - SetTime
+  - StartRace
+  - DestroyTarget
+  - RemoveTarget
+  - EliminateTarget
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

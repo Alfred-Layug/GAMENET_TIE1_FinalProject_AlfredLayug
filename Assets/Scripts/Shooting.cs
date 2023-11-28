@@ -43,6 +43,11 @@ public class Shooting : MonoBehaviourPunCallbacks
                 Debug.Log(hit.collider.gameObject.name);
 
                 photonView.RPC("CreateBulletEffects", RpcTarget.All, hit.point);
+
+                if (hit.collider.GetComponent<Target>() != null)
+                {
+                    hit.collider.gameObject.GetComponent<Target>().EliminateTarget();
+                }
             }
         }
     }

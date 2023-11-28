@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 7714391028467040143}
   - component: {fileID: 5115601555057710369}
   - component: {fileID: 8814577371709965600}
+  - component: {fileID: 5418120400649478228}
+  - component: {fileID: 6721985188521354710}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -220,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76fdbf3c181503348879f05ddba4a148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isMovementEnabled: 0
 --- !u!114 &6353625624564279224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +308,32 @@ MonoBehaviour:
   _camera: {fileID: 4798172617570286112}
   _bulletEffectPrefab: {fileID: 2471991592510312249, guid: 10e9f76485a97cf4f997a437311696dc, type: 3}
   _playerNameText: {fileID: 886951251522165204}
+--- !u!114 &5418120400649478228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295068496450094911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcf1f3b73162aa4992d46830ac7dbe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6721985188521354710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295068496450094911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10c2eabeecaa3f41b32f5bc11e00b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 0}
+  timeToStart: 3
 --- !u!1 &2506589246820099623
 GameObject:
   m_ObjectHideFlags: 0
